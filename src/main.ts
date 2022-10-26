@@ -1,6 +1,14 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import express, { json, Request, Response } from "express";
 const app = express();
+const jwt = require('jsonwebtoken');
+const cors = require('cors');
+import dotenv from 'dotenv';
+
+dotenv.config();
+process.env.TOKEN_SECRET;
+
+app.use(cors());
 app.use(json());
 const port = 3000;
 
@@ -27,7 +35,8 @@ app.get("/books", async (req, res) => {
 
 app.post("/book", async (req, res) => {
     const postMany = await prisma.book.create({
-        data:{author:req.body.author,
+        data:{
+            author:req.body.author,
             summary:req.body.summary,
             name:req.body.name
         }
@@ -38,9 +47,9 @@ app.post("/book", async (req, res) => {
 app.post("/books", async (req, res) => {
   const createMany = await prisma.book.createMany({
     data: [
-      { summary: "dsdv", name: "gsdgsh", author: "sjbfalnjk" },
-      { summary: "gfhmn", name: "dsfar", author: "wsty" },
-      { summary: "ccghv", name: "rurafu", author: "rutafar" },
+      { summary: "ozet1", name: "kitap1", author: "yazar1" },
+      { summary: "ozet2", name: "kitap2", author: "yazar2" },
+      { summary: "ozet3", name: "kitap3", author: "yazar3" },
     ],
   });
   return res.send("True");
