@@ -45,13 +45,13 @@ app.post("/book", async (req, res) => {
   });
 
 app.post("/books", async (req, res) => {
-  const createMany = await prisma.book.createMany({
-    data: [
-      { summary: "ozet1", name: "kitap1", author: "yazar1" },
-      { summary: "ozet2", name: "kitap2", author: "yazar2" },
-      { summary: "ozet3", name: "kitap3", author: "yazar3" },
-    ],
-  });
+  const createMany = await prisma.book.create({
+    data: {
+      author: req.body.author,
+      summary:req.body.summary,
+      name:req.body.name
+    }
+  })
   return res.send("True");
 });
 
